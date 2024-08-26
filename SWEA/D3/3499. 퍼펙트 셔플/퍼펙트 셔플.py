@@ -1,22 +1,22 @@
-T = int(input())
+for tc in range(1, int(input()) + 1):
+    # 입력
+    N = int(input())
+    card = input().split()
+    deck = [0] * N
 
-for tc in range(1, T+1):
-    n = int(input())
-    lst = input().split()
-    lst_1, lst_2 = [], []
-    stack = []
+    d = (N + 1) // 2
 
-    if n % 2 == 0:
-        lst_1, lst_2 = lst[:n//2], lst[n//2:]
-    else:
-        lst_1, lst_2 = lst[:n//2+1], lst[n//2+1:]
+    i1 = 0
+    i2 = d
+    i3 = 0
+    while i3 < N:
+        if i1 < d:
+            deck[i3] = card[i1]
+            i1 += 1
+            i3 += 1
 
-    for k in range(len(lst_2)):
-        stack.append(lst_1[k])
-        stack.append(lst_2[k])
-
-    if len(lst_1) == n//2+1 :
-        stack.append(lst_1[n//2])
-
-    answer = ' '.join(stack)
-    print(f'#{tc} {answer}')
+        if i2 < N:
+            deck[i3] = card[i2]
+            i2 += 1
+            i3 += 1
+    print(f'#{tc}', *deck)
