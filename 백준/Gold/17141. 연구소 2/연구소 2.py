@@ -64,19 +64,19 @@ def viral_transmission(arr, virus_board):
 
                 # 바이러스 감염시키기
                 if ( new_virus_board[n_i][n_j] == 0 or new_virus_board[n_i][n_j] == 2 ) and not visited[n_i][n_j]:
-                    new_virus_board[n_i][n_j] = 9
+                    new_virus_board[n_i][n_j] = time
                     virus_queue.append((n_i, n_j))
                 elif new_virus_board[n_i][n_j] == 1 and not visited[n_i][n_j]:
                     new_virus_board[n_i][n_j] = '-'
 
                 visited[n_i][n_j] = True
-
+    
     cnt = 0
     for x in range(N):
         for y in range(N):
-            if new_virus_board[x][y] == 0 or new_virus_board[x][y] == 2:
+            if new_virus_board[x][y] == 0 or new_virus_board[x][y] == 2 and not visited[x][y]:
                 cnt += 1
-
+    
     if cnt == M:
         answer = min(time - 1, answer)
 
