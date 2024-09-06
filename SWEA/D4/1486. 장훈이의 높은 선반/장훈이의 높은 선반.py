@@ -1,5 +1,3 @@
-
-
 def sub_set(bits):
     global answer
 
