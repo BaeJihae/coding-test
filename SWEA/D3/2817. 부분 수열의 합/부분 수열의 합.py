@@ -1,27 +1,20 @@
-def subset(i):
+def sub_set(sum, idx):
     global answer
 
-    if i == N:
-        sum = 0
-        for k in range(N):
-            if bits[k] == 1:
-                sum += A[k]
+    if idx == N:
         if sum == K:
             answer += 1
         return
 
-    bits[i] = 0
-    subset(i + 1)
+    sub_set(sum + lst[idx], idx + 1)
+    sub_set(sum, idx + 1)
 
-    bits[i] = 1
-    subset(i + 1)
 
 for tc in range(1, int(input()) + 1):
     N, K = map(int, input().split())
-    A = list(map(int, input().split()))
+    lst = list(map(int, input().split()))
 
+    # 부분 수열의 합이 K인 수열의 개수
     answer = 0
-
-    bits = [0] * N
-    subset(0)
+    sub_set(0, 0)
     print(f'#{tc}', answer)
