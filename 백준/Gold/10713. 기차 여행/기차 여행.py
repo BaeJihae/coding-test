@@ -1,22 +1,24 @@
-from collections import defaultdict
-
 N, M = map(int, input().split())
 p_lst = list(map(int, input().split()))
 
-dct = defaultdict()
 answer = 0
 
+arr = [0] * (N+1)
 for i in range(M-1):
-    if p_lst[i] == p_lst[i+1]:
-        continue
-    for j in range(min(p_lst[i], p_lst[i + 1]), max(p_lst[i], p_lst[i + 1])):
-        dct[j] = dct.get(j, 0) + 1
+    arr[min(p_lst[i], p_lst[i + 1]) - 1] += 1
+    arr[max(p_lst[i], p_lst[i + 1]) - 1] -= 1
 
-for n in range(1, N):
-    if dct.get(n, 0) != 0:
-        A, B, C = map(int, input().split())
-        answer += min(dct[n] * A, dct[n] * B + C)
+for i in range(N-1):
+    arr[i + 1] = arr[i] + arr[i + 1]
+
+arr = arr[:-2]
+
+for n in arr:
+    if n == 0:
+        input()
+        continue
     else:
-        input().split()
+        A, B, C = map(int, input().split())
+        answer += min(n * A, n * B + C)
 
 print(answer)
