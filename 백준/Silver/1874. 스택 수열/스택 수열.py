@@ -12,15 +12,15 @@ i = 1 # 증가할 수
 for _ in range(n):
     a = int(readline()) # 비교할 대상
     
-    while(i <= n + 1):
-        if stack and stack[-1] == a:
-            stack.pop()
-            answer.append('-')
-            break
-    
+    while(a >= i):
         stack.append(i)
         answer.append('+')
         i += 1
+    
+    if a != stack.pop():
+        break
+    
+    answer.append('-')
 
 if stack:
     write("NO")
