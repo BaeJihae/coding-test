@@ -1,15 +1,14 @@
 import sys
-input = sys.stdin.readline
 
-n = int(input())
-answer = [0] * 10_001
+readline = sys.stdin.readline
+
+n = int(readline())
+count = [0] * 10001
 
 for _ in range(n):
-    x = int(input())
-    answer[x] += 1
+    count[int(readline())] += 1
 
 for i in range(10001):
-    k = answer[i]
-    if k:
-        for _ in range(k):
+    if count[i] != 0:
+        for _ in range(count[i]):
             print(i)
