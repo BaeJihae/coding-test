@@ -12,6 +12,7 @@ def back(n, depth):
         for i in str(n):
             write(i + " ")
         write("\n")
+        return 
     
     for i in range(1, N + 1):
         if not visited[i]:
