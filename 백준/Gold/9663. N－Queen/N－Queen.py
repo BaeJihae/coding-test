@@ -1,26 +1,34 @@
 N = int(input())
 
-# queen의 N개를 놓을 수 있는 경우의 수
 answer = 0
 
-# 열의 조회를 체크할 배열
-col_check = [0] * N
-# 대각선을 체크할 배열
-cross_right_down = [0] * (2 * N - 1)
-cross_right_up = [0] * (2 * N - 1)
+# 대각선 검사를 위한 배열 2가지
+right_up_checking = [0] * (N * 2 - 1)
+right_down_checking = [0] * (N * 2 - 1)
 
-def dfs(idx):
+# 세로 검사를 위한 배열
+down_checking = [0] * N
+
+def backtracking(i):
     global answer
-
-    if idx == N:
+    
+    if i == N:
         answer += 1
         return
+    
+    for j in range(N):
+        # 유효성 검사 및 가지치기
+        if not down_checking[j] and not right_up_checking[i + j] and not right_down_checking[i - j + N - 1]:
+            down_checking[j] = 1
+            right_up_checking[i + j] = 1
+            right_down_checking[i - j + N - 1] = 1
+            
+            backtracking(i + 1)
+            
+            down_checking[j] = 0
+            right_up_checking[i + j] = 0
+            right_down_checking[i - j + N - 1] = 0
+    return
 
-    for i in range(N):
-        if not col_check[i] and not cross_right_down[idx - i + (N - 1)] and not cross_right_up[idx + i]:
-            col_check[i] = cross_right_down[idx - i + (N - 1)] = cross_right_up[idx + i] = True
-            dfs(idx + 1)
-            col_check[i] = cross_right_down[idx - i + (N - 1)] = cross_right_up[idx + i] = False
-
-dfs(0)
+backtracking(0)
 print(answer)
