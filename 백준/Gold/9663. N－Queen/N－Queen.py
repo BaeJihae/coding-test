@@ -12,11 +12,10 @@ down_checking = [0] * N
 def backtracking(i):
     global answer
     
-    if i == N - 1:
+    if i == N:
         answer += 1
         return
     
-    i += 1
     for j in range(N):
         # 유효성 검사 및 가지치기
         if not down_checking[j] and not right_up_checking[i + j] and not right_down_checking[i - j + N - 1]:
@@ -24,22 +23,12 @@ def backtracking(i):
             right_up_checking[i + j] = 1
             right_down_checking[i - j + N - 1] = 1
             
-            backtracking(i)
+            backtracking(i + 1)
             
             down_checking[j] = 0
             right_up_checking[i + j] = 0
             right_down_checking[i - j + N - 1] = 0
     return
 
-for y in range(N):
-    down_checking[y] = 1
-    right_up_checking[0 + y] = 1
-    right_down_checking[0 - y + N - 1] = 1
-    
-    backtracking(0)
-    
-    down_checking[y] = 0
-    right_up_checking[0 + y] = 0
-    right_down_checking[0 - y + N - 1] = 0
-    
+backtracking(0)
 print(answer)
