@@ -15,10 +15,6 @@ def binary_search(x, i, j):
     
     if i > j:
         return
-    
-    if j - i <= 1 and (A[i] == x or A[j] == x):
-        result = True
-        return 
 
     m = A[(i + j) // 2]
     if x == m:
